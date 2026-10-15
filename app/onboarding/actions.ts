@@ -45,17 +45,15 @@ export async function saveProfile(
 
   if (membership) {
     const companyId = membership.company_id as string;
-    const { error: nameError } = await supabase
-      .from("companies")
-      .update({ name })
-      .eq("id", companyId);
-    const { error: profileError } = await supabase
-      .from("company_profiles")
-      .upsert({
+    // Run both saves at the same time instead of one after the other.
+    const [{ error: nameError }, { error: profileError }] = await Promise.all([
+      supabase.from("companies").update({ name }).eq("id", companyId),
+      supabase.from("company_profiles").upsert({
         company_id: companyId,
         ...fields,
         updated_at: new Date().toISOString(),
-      });
+      }),
+    ]);
     if (nameError || profileError) {
       return { error: "We could not save your changes. Please try again." };
     }
