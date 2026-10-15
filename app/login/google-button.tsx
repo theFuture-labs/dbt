@@ -10,13 +10,30 @@ export default function GoogleButton() {
   async function signIn() {
     setBusy(true);
     setError(null);
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
-    });
-    if (error) {
-      setError("Could not start Google sign-in. Try again in a moment.");
+
+    if (
+      !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ) {
+      setError(
+        "Sign-in is not configured yet: the two Supabase values are missing from this build. Add them in Vercel, then redeploy."
+      );
+      setBusy(false);
+      return;
+    }
+
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${window.location.origin}/auth/callback` },
+      });
+      if (error) {
+        setError(`Could not start Google sign-in: ${error.message}`);
+        setBusy(false);
+      }
+    } catch {
+      setError("Could not start Google sign-in. Please try again.");
       setBusy(false);
     }
   }
