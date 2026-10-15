@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy | DBT",
+  title: "Privacy Policy | diBiti",
 };
 
 // TODO before submitting to Meta/Google: replace the placeholders below
@@ -20,14 +20,14 @@ export default function Privacy() {
       <p>Last updated: {UPDATED}</p>
 
       <p className="notice">
-        This is a starter draft for DBT (working name). It must be reviewed and
+        This is a starter draft for diBiti. It must be reviewed and
         completed with your real company details before you submit it to Meta or
         Google.
       </p>
 
       <h2>Who we are</h2>
       <p>
-        DBT is operated by {COMPANY} (&quot;we&quot;, &quot;us&quot;). You can
+        diBiti is operated by {COMPANY} (&quot;we&quot;, &quot;us&quot;). You can
         contact us about privacy at {EMAIL}.
       </p>
 
@@ -80,7 +80,7 @@ export default function Privacy() {
       <h2>Sharing</h2>
       <p>
         We do not sell your data. We share it only with service providers that
-        help us operate DBT (hosting, database, payments, AI processing), and
+        help us operate diBiti (hosting, database, payments, AI processing), and
         where the law requires.
       </p>
 

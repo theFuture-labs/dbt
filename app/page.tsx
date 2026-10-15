@@ -9,15 +9,15 @@ export default function Home() {
         <div className="moon" aria-hidden="true" />
 
         <div className="hero-inner">
-          <p className="brand">DBT</p>
+          <p className="brand">diBiti</p>
           <h1>A team that works while you sleep.</h1>
           <p className="lede">
             AI agents that run your social media, operations and books from one
             company profile. You approve every move.
           </p>
-          <a className="btn" href="mailto:hello@example.com">
-            Join the early pilot
-          </a>
+          <Link className="btn" href="/login">
+            Get started
+          </Link>
         </div>
       </section>
 
@@ -81,7 +81,7 @@ export default function Home() {
       </section>
 
       <footer className="site-footer">
-        <span>DBT</span>
+        <span>diBiti</span>
         <Link href="/privacy">Privacy Policy</Link>
       </footer>
     </main>

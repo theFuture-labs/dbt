@@ -18,9 +18,9 @@ const body = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "DBT: your AI team",
+  title: "diBiti: your AI team",
   description:
-    "DBT gives your business a team of AI agents that work from your company profile, with your approval.",
+    "diBiti gives your business a team of AI agents that work from your company profile, with your approval.",
   manifest: "/manifest.webmanifest",
 };
 

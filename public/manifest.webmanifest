@@ -1,6 +1,6 @@
 {
-  "name": "DBT",
-  "short_name": "DBT",
+  "name": "diBiti",
+  "short_name": "diBiti",
   "description": "Your AI team, working from your company profile.",
   "start_url": "/",
   "display": "standalone",
