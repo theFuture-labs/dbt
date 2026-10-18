@@ -16,11 +16,20 @@ type Entry = {
 
 const EVENT_LABEL: Record<string, string> = {
   "run.completed": "Finished writing drafts",
+  "plan.proposed": "Proposed a 30-day content plan",
   "action.proposed": "Proposed a post",
   "action.approved": "Approved a post",
   "action.rejected": "Rejected a post",
   "action.edited": "Edited a post",
 };
+
+function label(e: Entry): string {
+  if (e.details?.type === "content_plan") {
+    if (e.event === "action.approved") return "Approved the content plan";
+    if (e.event === "action.rejected") return "Rejected the content plan";
+  }
+  return EVENT_LABEL[e.event] ?? e.event;
+}
 
 function actor(e: Entry): string {
   if (e.actor_type === "agent") return "Social Media Manager";
@@ -33,6 +42,8 @@ function summary(e: Entry): string {
   const parts: string[] = [];
   if (typeof d.platform === "string") parts.push(d.platform === "instagram" ? "Instagram" : "Facebook");
   if (typeof d.proposed === "number") parts.push(`${d.proposed} drafts`);
+  if (typeof d.slots === "number") parts.push(`${d.slots} planned posts`);
+  if (typeof d.day === "number") parts.push(`day ${d.day}`);
   if (d.source === "demo") parts.push("sample draft");
   if (d.needs_reapproval === true) parts.push("needs approval again");
   return parts.join(", ");
@@ -82,7 +93,7 @@ export default async function Audit() {
                   {new Date(e.created_at).toISOString().slice(0, 16).replace("T", " ")}
                 </span>
                 <span className="audit-what">
-                  <strong>{EVENT_LABEL[e.event] ?? e.event}</strong>
+                  <strong>{label(e)}</strong>
                   {summary(e) ? <span className="muted"> ({summary(e)})</span> : null}
                   <span className="fine audit-actor">{actor(e)}</span>
                 </span>

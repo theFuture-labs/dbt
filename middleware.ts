@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isPrivate = ["/dashboard", "/onboarding", "/queue", "/audit"].some((p) =>
+  const isPrivate = ["/dashboard", "/onboarding", "/queue", "/audit", "/plan"].some((p) =>
     path.startsWith(p)
   );
 

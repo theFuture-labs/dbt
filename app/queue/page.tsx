@@ -28,6 +28,7 @@ export default async function Queue() {
     .from("proposed_actions")
     .select("id, payload, status, source")
     .eq("company_id", companyId)
+    .eq("type", "social_post")
     .order("created_at", { ascending: false })
     .limit(100);
 

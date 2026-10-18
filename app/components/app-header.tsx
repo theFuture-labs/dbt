@@ -6,6 +6,7 @@ export default function AppHeader() {
       <span className="brand">diBiti</span>
       <nav className="app-nav" aria-label="Main">
         <Link href="/dashboard">Dashboard</Link>
+        <Link href="/plan">Content plan</Link>
         <Link href="/queue">Approval queue</Link>
         <Link href="/audit">Audit log</Link>
       </nav>

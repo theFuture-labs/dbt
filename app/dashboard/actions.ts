@@ -26,6 +26,7 @@ export async function draftPostsAction(): Promise<{
     .from("proposed_actions")
     .select("id", { count: "exact", head: true })
     .eq("company_id", companyId)
+    .eq("type", "social_post")
     .eq("status", "pending");
   if ((pending ?? 0) >= MAX_PENDING) {
     return { error: "You have a lot of drafts waiting. Approve or reject some first." };

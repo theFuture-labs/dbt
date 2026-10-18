@@ -32,6 +32,7 @@ export default async function Dashboard() {
       .from("proposed_actions")
       .select("id", { count: "exact", head: true })
       .eq("company_id", companyId)
+      .eq("type", "social_post")
       .eq("status", "pending"),
   ]);
 
@@ -60,6 +61,8 @@ export default async function Dashboard() {
           </p>
           <DraftButton />
           <p className="fine">
+            <Link href="/plan">30-day content plan</Link>
+            {" · "}
             <Link href="/queue">
               {pending ? `${pending} waiting for your approval` : "Approval queue"}
             </Link>
