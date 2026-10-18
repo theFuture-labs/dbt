@@ -1,9 +1,9 @@
-# DBT Milestone 0: Setup Checklist
+# diBiti Milestone 0: Setup Checklist
 
-Do these in order. Each is free. Use one email you control (e.g. the one you'll use for DBT) for all of them.
+Do these in order. Each is free. Use one email you control (e.g. the one you'll use for diBiti) for all of them.
 
 ## 1. Name and domain (today)
-- Pick the name. DBT is a working name, so check it isn't taken (search it + "AI").
+- Pick the name. diBiti is a working name, so check it isn't taken (search it + "AI").
 - Buy a domain (Namecheap, Porkbun, or Google Domains successor). A `.com` is best.
 - Create a business email like `hello@yourdomain.com`. Meta and Google both look for a real contact.
 
@@ -22,7 +22,7 @@ Do these in order. Each is free. Use one email you control (e.g. the one you'll 
 In `app/privacy/page.tsx`, replace `[Your legal company name]` and `[privacy@yourdomain.com]`. Send me the real values and I'll do it. Ideally a lawyer reviews the text before App Review.
 
 ## 5. Meta (starts the review clock)
-- Make sure DBT has an **Instagram Business or Creator account** linked to a **Facebook Page**.
+- Make sure diBiti has an **Instagram Business or Creator account** linked to a **Facebook Page**.
 - Go to developers.facebook.com and register as a developer.
 - Create a **Business Portfolio** at business.facebook.com.
 - Create an app (type: Business). Add your privacy policy URL and app icon.
@@ -30,7 +30,7 @@ In `app/privacy/page.tsx`, replace `[Your legal company name]` and `[privacy@you
 - Add yourself as admin, and later, pilots as testers.
 
 ## 6. Google
-- Go to console.cloud.google.com and create a project called DBT.
+- Go to console.cloud.google.com and create a project called diBiti.
 - Set up the OAuth consent screen. Use only basic sign-in scopes for now.
 - Add your domain and privacy policy URL.
 

@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "../../lib/supabase/server";
+import AppHeader from "../components/app-header";
+import DraftButton from "./draft-button";
 
 export const metadata = { title: "Dashboard | diBiti" };
+// Writing drafts with the AI can take a little while.
+export const maxDuration = 60;
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -21,9 +25,14 @@ export default async function Dashboard() {
   if (!membership) redirect("/onboarding");
 
   const companyId = membership.company_id as string;
-  const [{ data: company }, { data: profile }] = await Promise.all([
+  const [{ data: company }, { data: profile }, { count: pending }] = await Promise.all([
     supabase.from("companies").select("name").eq("id", companyId).maybeSingle(),
     supabase.from("company_profiles").select("*").eq("company_id", companyId).maybeSingle(),
+    supabase
+      .from("proposed_actions")
+      .select("id", { count: "exact", head: true })
+      .eq("company_id", companyId)
+      .eq("status", "pending"),
   ]);
 
   const rows: { label: string; value: string }[] = [
@@ -37,18 +46,25 @@ export default async function Dashboard() {
 
   return (
     <main className="app-shell">
-      <header className="app-header">
-        <span className="brand">diBiti</span>
-        <form action="/auth/signout" method="post">
-          <button className="btn btn-ghost btn-small" type="submit">
-            Sign out
-          </button>
-        </form>
-      </header>
+      <AppHeader />
 
       <section className="app-main">
         <h1>{company?.name ?? "Your company"}</h1>
         <p className="muted">Signed in as {user.email}</p>
+
+        <div className="panel">
+          <h2>Social Media Manager</h2>
+          <p className="muted">
+            Writes post drafts from your company profile. Nothing is published
+            without your approval.
+          </p>
+          <DraftButton />
+          <p className="fine">
+            <Link href="/queue">
+              {pending ? `${pending} waiting for your approval` : "Approval queue"}
+            </Link>
+          </p>
+        </div>
 
         <div className="panel">
           <div className="panel-head">
@@ -65,14 +81,6 @@ export default async function Dashboard() {
               </div>
             ))}
           </dl>
-        </div>
-
-        <div className="panel">
-          <h2>Your team</h2>
-          <p className="muted">
-            Your Social Media Manager is next. It will use this profile to plan
-            and draft posts, and you will approve each one.
-          </p>
         </div>
       </section>
     </main>
